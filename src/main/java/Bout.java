@@ -1,20 +1,56 @@
 public class Bout {
 
-    private Fencer fencer1, fencer2;
-    private boolean boutComplete;
-    private int fencer1PointsScored, fencer2PointsScored;
+    private Fencer fencerLeft, fencerRight;
+    private boolean boutComplete, isSelfBout;
+    private int fencerLeftPointsScored, fencerRightPointsScored;
     private Fencer victor;
 
-    public Bout(Fencer fencer1, Fencer fencer2) {
-        this.fencer1 = fencer1;
-        this.fencer2 = fencer2;
+    public Bout(Fencer fencerLeft, Fencer fencerRight) {
+        this.fencerLeft = fencerLeft;
+        this.fencerRight = fencerRight;
+        this.boutComplete = false;
+        this.isSelfBout = (fencerLeft.equals(fencerRight));
     }
 
-    //boutVictor is either 1 or 2, corresponding to the fencer that won the bout
-    public void enterResults(int fencer1PointsScored, int fencer2PointsScored, int boutVictor) {
-        this.fencer1PointsScored = fencer1PointsScored;
-        this.fencer2PointsScored = fencer2PointsScored;
-        this.victor = (boutVictor==1) ? fencer1 : fencer2;
+    //boutVictor is either "left" or "right", corresponding to the fencer that won the bout
+    public void enterResults(int fencerLeftPointsScored, int fencerRightPointsScored, String boutVictor) {
+        this.fencerLeftPointsScored = fencerLeftPointsScored;
+        this.fencerRightPointsScored = fencerRightPointsScored;
+        this.victor = (boutVictor.equals("left")) ? fencerLeft : fencerRight;
         this.boutComplete = true;
+    }
+
+    public Fencer getFencerLeft() {
+        return fencerLeft;
+    }
+
+    public Fencer getFencerRight() {
+        return fencerRight;
+    }
+
+    public boolean isBoutComplete() {
+        return boutComplete;
+    }
+
+    public boolean isSelfBout() {
+        return isSelfBout;
+    }
+
+    public int getFencerLeftPointsScored() {
+        return fencerLeftPointsScored;
+    }
+
+    public int getFencerRightPointsScored() {
+        return fencerRightPointsScored;
+    }
+
+    public Fencer getVictor() {
+        return victor;
+    }
+
+    @Override
+    public String toString() {
+        if (!boutComplete) return "fencer left: " + this.fencerLeft + " v fencer right: " + this.fencerRight;
+        else return "fencer left: " + this.fencerLeft + " points scored: " + this.fencerLeftPointsScored + " v fencer right: " + this.fencerRight + "points scored: " + this.fencerRightPointsScored + "victor: " + victor;
     }
 }
