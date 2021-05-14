@@ -14,8 +14,6 @@ public class Pool {
             }
         }
 
-        this.printPoolBouts(); //debug
-
     }
 
     public void printPoolBouts() {

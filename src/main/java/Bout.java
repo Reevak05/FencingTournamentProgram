@@ -12,7 +12,6 @@ public class Bout {
         this.isSelfBout = (fencerLeft.equals(fencerRight));
     }
 
-    //boutVictor is either "left" or "right", corresponding to the fencer that won the bout
     public void enterResults(int fencerLeftPointsScored, int fencerRightPointsScored, Fencer victor) {
         this.fencerLeftPointsScored = fencerLeftPointsScored;
         this.fencerRightPointsScored = fencerRightPointsScored;
@@ -51,7 +50,7 @@ public class Bout {
     @Override
     public String toString() {
         if (isSelfBout) return "self bout: " + fencerLeft;
-        else if (boutComplete) return "bout complete: true, fencer left: " + this.fencerLeft + " points scored: " + this.fencerLeftPointsScored + " v fencer right: " + this.fencerRight + "points scored: " + this.fencerRightPointsScored + "victor: " + victor;
+        else if (boutComplete) return "bout complete: true, fencer left: " + this.fencerLeft + " points scored: " + this.fencerLeftPointsScored + " v fencer right: " + this.fencerRight + "points scored: " + this.fencerRightPointsScored + " victor: " + victor;
         else return "bout complete: false, fencer left: " + this.fencerLeft + " v fencer right: " + this.fencerRight;
     }
 }

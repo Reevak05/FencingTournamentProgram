@@ -18,18 +18,27 @@ public class FencingTournamentProgram {
             System.out.println("Enter the name of fencer " + i + ":");
             poolFencers.add(new Fencer(i, input.next()));
         }
+
         Pool pool1 = new Pool(poolFencers);
+        pool1.printPoolBouts();
 
         //pool bout results entry
-        for (Bout[] boutRow :pool1.getPoolBouts()) {
-            for (Bout bout : boutRow) {
-                System.out.println("enter the points scored by the left fencer: ");
-                int leftFencerPointsScored = input.nextInt();
-                System.out.println("enter the points scored by the left fencer: ");
-                int rightFencerPointsScored = input.nextInt();
-                bout.enterResults(leftFencerPointsScored, rightFencerPointsScored, (leftFencerPointsScored>=rightFencerPointsScored) ? bout.getFencerLeft() : bout.getFencerRight());
+        for (int row = 0; row<pool1.getPoolBouts().length; row++) {
+            for (int col = 0; col< pool1.getPoolBouts()[0].length; col++) {
+                if (!pool1.getPoolBouts()[row][col].isSelfBout() && !pool1.getPoolBouts()[row][col].isBoutComplete()) {
+                    System.out.println("results entry for: " + pool1.getPoolBouts()[row][col]);
+                    System.out.println("enter the points scored by " + pool1.getPoolBouts()[row][col].getFencerLeft().getName());
+                    int leftFencerPointsScored = input.nextInt();
+                    System.out.println("enter the points scored by " + pool1.getPoolBouts()[row][col].getFencerRight().getName());
+                    int rightFencerPointsScored = input.nextInt();
+                    pool1.getPoolBouts()[row][col].enterResults(leftFencerPointsScored, rightFencerPointsScored, (leftFencerPointsScored >= rightFencerPointsScored) ? pool1.getPoolBouts()[row][col].getFencerLeft() : pool1.getPoolBouts()[row][col].getFencerRight());
+                    pool1.getPoolBouts()[col][row].enterResults(rightFencerPointsScored,leftFencerPointsScored, (rightFencerPointsScored >= leftFencerPointsScored) ? pool1.getPoolBouts()[col][row].getFencerLeft() : pool1.getPoolBouts()[col][row].getFencerRight());
+                }
             }
         }
+
+        pool1.printPoolBouts();
+
     }
 
     public static void main(String[] args) {
