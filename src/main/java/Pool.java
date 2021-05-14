@@ -14,17 +14,20 @@ public class Pool {
             }
         }
 
-        for (Bout[] boutRow : poolBouts) { //debug
+        this.printPoolBouts(); //debug
+
+    }
+
+    public void printPoolBouts() {
+        for (Bout[] boutRow : this.poolBouts) {
             for (Bout bout : boutRow) {
                 System.out.println(bout);
             }
         }
-
     }
 
     public Bout[][] getPoolBouts() {
         return poolBouts;
     }
-
 
 }

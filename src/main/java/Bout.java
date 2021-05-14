@@ -13,10 +13,10 @@ public class Bout {
     }
 
     //boutVictor is either "left" or "right", corresponding to the fencer that won the bout
-    public void enterResults(int fencerLeftPointsScored, int fencerRightPointsScored, String boutVictor) {
+    public void enterResults(int fencerLeftPointsScored, int fencerRightPointsScored, Fencer victor) {
         this.fencerLeftPointsScored = fencerLeftPointsScored;
         this.fencerRightPointsScored = fencerRightPointsScored;
-        this.victor = (boutVictor.equals("left")) ? fencerLeft : fencerRight;
+        this.victor = victor;
         this.boutComplete = true;
     }
 
