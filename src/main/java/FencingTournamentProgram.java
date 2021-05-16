@@ -21,6 +21,7 @@ public class FencingTournamentProgram {
 
         Pool pool1 = new Pool(poolFencers);
         pool1.printPoolBouts();
+        System.out.println();
 
         //pool bout results entry
         for (int row = 0; row<pool1.getPoolBouts().length; row++) {
@@ -37,7 +38,11 @@ public class FencingTournamentProgram {
             }
         }
 
+        System.out.println();
         pool1.printPoolBouts();
+
+        System.out.println();
+        pool1.printPoolStats();
 
     }
 
