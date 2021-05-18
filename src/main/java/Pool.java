@@ -25,30 +25,17 @@ public class Pool {
     }
 
     public void printPoolStats() {
-        int boutsWon = 0;
-        int touchesScored = 0;
-        int touchesReceived = 0;
-
-        for (Bout[] boutRow : this.poolBouts) {
-            System.out.println(boutRow[0].getFencerLeft());
-            for (Bout bout : boutRow) {
-                if (!bout.isSelfBout() && bout.isBoutComplete()){
-                    if (bout.getVictor().equals(bout.getFencerLeft())) boutsWon++;
-                    touchesScored += bout.getFencerLeftPointsScored();
-                    touchesReceived += bout.getFencerRightPointsScored();
-                }
-            }
-            int indicator = touchesScored-touchesReceived;
-            double winPercentage = boutsWon/(double)boutRow.length;
-            System.out.println("bouts won: " + boutsWon);
-            System.out.println("touches scored: " + touchesScored);
-            System.out.println("touches received: " + touchesReceived);
-            System.out.println("indicator: " + indicator);
-            System.out.println("percentage of bouts won: " + winPercentage);
+        for (Fencer fencer : this.poolFencers) {
+            System.out.println(fencer);
+            System.out.println("bouts won: " + fencer.getBoutsWon());
+            System.out.println("touches scored: " + fencer.getTouchesScored());
+            System.out.println("touches received: " + fencer.getTouchesReceived());
+            System.out.println("indicator: " + fencer.getIndicator());
+            System.out.println("percentage of bouts won: " + fencer.getWinPercentage() + "%");
             System.out.println();
         }
-
     }
+
 
     public Bout[][] getPoolBouts() {
         return poolBouts;

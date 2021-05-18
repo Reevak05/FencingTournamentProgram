@@ -27,13 +27,32 @@ public class FencingTournamentProgram {
         for (int row = 0; row<pool1.getPoolBouts().length; row++) {
             for (int col = 0; col< pool1.getPoolBouts()[0].length; col++) {
                 if (!pool1.getPoolBouts()[row][col].isSelfBout() && !pool1.getPoolBouts()[row][col].isBoutComplete()) {
-                    System.out.println("results entry for: " + pool1.getPoolBouts()[row][col]);
+
+                    //results input
+                    System.out.println("results entry for: " + pool1.getPoolBouts()[row][col].getFencerLeft() + " v " + pool1.getPoolBouts()[row][col].getFencerRight());
                     System.out.println("enter the points scored by " + pool1.getPoolBouts()[row][col].getFencerLeft().getName());
                     int leftFencerPointsScored = input.nextInt();
                     System.out.println("enter the points scored by " + pool1.getPoolBouts()[row][col].getFencerRight().getName());
                     int rightFencerPointsScored = input.nextInt();
+
+                    //results saving to pool bouts data
                     pool1.getPoolBouts()[row][col].enterResults(leftFencerPointsScored, rightFencerPointsScored, (leftFencerPointsScored >= rightFencerPointsScored) ? pool1.getPoolBouts()[row][col].getFencerLeft() : pool1.getPoolBouts()[row][col].getFencerRight());
                     pool1.getPoolBouts()[col][row].enterResults(rightFencerPointsScored,leftFencerPointsScored, (rightFencerPointsScored >= leftFencerPointsScored) ? pool1.getPoolBouts()[col][row].getFencerLeft() : pool1.getPoolBouts()[col][row].getFencerRight());
+
+                    //individual fencer stats update
+                    pool1.getPoolBouts()[row][col].getFencerLeft().incrementTouchesScored(leftFencerPointsScored);
+                    pool1.getPoolBouts()[row][col].getFencerLeft().incrementTouchesReceived(rightFencerPointsScored);
+                    pool1.getPoolBouts()[row][col].getFencerLeft().incrementBoutsFenced();
+                    if (leftFencerPointsScored >= rightFencerPointsScored) {
+                        pool1.getPoolBouts()[row][col].getFencerLeft().incrementBoutsWon();
+                    }
+
+                    pool1.getPoolBouts()[row][col].getFencerRight().incrementTouchesScored(rightFencerPointsScored);
+                    pool1.getPoolBouts()[row][col].getFencerRight().incrementTouchesReceived(leftFencerPointsScored);
+                    pool1.getPoolBouts()[row][col].getFencerRight().incrementBoutsFenced();
+                    if (!(leftFencerPointsScored >= rightFencerPointsScored)) {
+                        pool1.getPoolBouts()[row][col].getFencerRight().incrementBoutsWon();
+                    }
                 }
             }
         }
