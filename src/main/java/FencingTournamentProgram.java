@@ -1,9 +1,61 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class FencingTournamentProgram {
+public class FencingTournamentProgram implements ActionListener {
+
+    private JFrame frame;
+    private JPanel panelInputFencers, panelShowBouts, panelInputScores, panelShowStats;
+    private JTextField testFieldAddFencerName;
+    private JButton buttonAddFencer;
+
+
 
     public FencingTournamentProgram() {
+        //frame setup
+        frame = new JFrame("Fencing Tournament Program");
+        frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.X_AXIS));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        //panel for fencer input
+        panelInputFencers = new JPanel();
+        panelInputFencers.setLayout(new BoxLayout(panelInputFencers, BoxLayout.Y_AXIS));
+
+        testFieldAddFencerName = new JTextField();
+        panelInputFencers.add(testFieldAddFencerName);
+        buttonAddFencer = new JButton("add fencer");
+
+        frame.add(panelInputFencers);
+
+
+        //panel to tell user the bouts
+        panelShowBouts = new JPanel();
+        panelShowBouts.setLayout(new BoxLayout(panelShowBouts, BoxLayout.Y_AXIS));
+
+        frame.add(panelShowBouts);
+
+
+        //panel to enter scores
+        panelInputScores = new JPanel();
+        panelInputScores.setLayout(new BoxLayout(panelInputScores, BoxLayout.Y_AXIS));
+
+        frame.add(panelInputScores);
+
+        //panel to tell user the stats of the fencers
+        panelShowStats = new JPanel();
+        panelShowStats.setLayout(new BoxLayout(panelShowStats, BoxLayout.Y_AXIS));
+
+        frame.add(panelShowStats);
+
+
+        //frame setup
+        frame.pack();
+        frame.setVisible(true);
+
+
+
         System.out.println("FencingTournamentProgram ready.");
 
         Scanner input = new Scanner(System.in);
@@ -67,5 +119,19 @@ public class FencingTournamentProgram {
 
     public static void main(String[] args) {
         FencingTournamentProgram fencingTournamentProgram = new FencingTournamentProgram();
+    }
+
+    /**
+     * Invoked when an action occurs.
+     *
+     * @param e the event to be processed
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String buttonName = e.getActionCommand();
+
+        if (buttonName.equals("add fencer")) {
+
+        }
     }
 }
