@@ -1,5 +1,3 @@
-import java.util.HashMap;
-
 public class Fencer {
 
     private final int number;

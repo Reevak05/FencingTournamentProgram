@@ -8,13 +8,13 @@ public class FencingTournamentProgram implements ActionListener {
 
     private JFrame frame;
     private JPanel panelInputFencers, panelShowBouts, panelInputScores, panelShowStats;
-    private JLabel labelPanelInputFencers, labelAddFencerName, labelPanelShowBouts, labelPanelInputScores, labelPanelShowStats;
+    private JLabel labelPanelInputFencers, labelAddFencerName, labelPanelShowBouts, labelPanelInputScores, labelBoutForResultEntry, labelResultEntryFencer1, labelResultEntryFencer2, labelPanelShowStats;
     private JTextField textFieldAddFencerName, leftFencerPointsScoredText, rightFencerPointsScoredText;
-    private JButton buttonAddFencer, buttonCreatePool;
+    private JButton buttonAddFencer, buttonCreatePool, buttonEnterResult;
     private ArrayList<Fencer> poolFencers = new ArrayList<>();
     private ArrayList<Pool> pools;
     private Pool pool1;
-    private int poolResultsEntryPositionRow, poolResultsEntryPositionCol;
+    private int poolResultsEntryPositionRow = 0, poolResultsEntryPositionCol = 0;
 
 
 
@@ -62,6 +62,20 @@ public class FencingTournamentProgram implements ActionListener {
         labelPanelInputScores = new JLabel("Bout Results Input");
         panelInputScores.add(labelPanelInputScores);
 
+        labelBoutForResultEntry = new JLabel("results entry - not for use yet");
+        panelInputScores.add(labelBoutForResultEntry);
+        labelResultEntryFencer1 = new JLabel("fencer 1");
+        panelInputScores.add(labelResultEntryFencer1);
+        rightFencerPointsScoredText = new JTextField();
+        panelInputScores.add(rightFencerPointsScoredText);
+        labelResultEntryFencer2 = new JLabel("fencer 2");
+        panelInputScores.add(labelResultEntryFencer2);
+        leftFencerPointsScoredText = new JTextField();
+        panelInputScores.add(leftFencerPointsScoredText);
+        buttonEnterResult = new JButton("enter result");
+        buttonEnterResult.addActionListener(this);
+        panelInputScores.add(buttonEnterResult);
+
         frame.add(panelInputScores);
 
         //panel to tell user the stats of the fencers
@@ -81,42 +95,41 @@ public class FencingTournamentProgram implements ActionListener {
     }
 
     public static void main(String[] args) {
-        FencingTournamentProgram fencingTournamentProgram = new FencingTournamentProgram();
+        new FencingTournamentProgram();
     }
 
     //results entry setup
     public void setUpNextResultsInput(){
+        System.out.println(poolResultsEntryPositionRow + " row");
+        System.out.println(poolResultsEntryPositionCol + " col");
         if (!pool1.getPoolBouts()[poolResultsEntryPositionRow][poolResultsEntryPositionCol].isSelfBout() && !pool1.getPoolBouts()[poolResultsEntryPositionRow][poolResultsEntryPositionCol].isBoutComplete()) {
 
-            //results input setup
-            panelInputScores.add(new JLabel("results entry for: " + pool1.getPoolBouts()[poolResultsEntryPositionRow][poolResultsEntryPositionCol].getFencerLeft() + " v " + pool1.getPoolBouts()[poolResultsEntryPositionRow][poolResultsEntryPositionCol].getFencerRight()));
 
-            panelInputScores.add(new JLabel("enter the points scored by " + pool1.getPoolBouts()[poolResultsEntryPositionRow][poolResultsEntryPositionCol].getFencerLeft().getName()));
-            leftFencerPointsScoredText = new JTextField();
-            panelInputScores.add(leftFencerPointsScoredText);
+            labelBoutForResultEntry.setText("results entry for: " + pool1.getPoolBouts()[poolResultsEntryPositionRow][poolResultsEntryPositionCol].getFencerLeft() + " v " + pool1.getPoolBouts()[poolResultsEntryPositionRow][poolResultsEntryPositionCol].getFencerRight());
+            labelResultEntryFencer1.setText("enter the points scored by " + pool1.getPoolBouts()[poolResultsEntryPositionRow][poolResultsEntryPositionCol].getFencerLeft().getName());
+            labelResultEntryFencer2.setText("enter the points scored by " + pool1.getPoolBouts()[poolResultsEntryPositionRow][poolResultsEntryPositionCol].getFencerRight().getName());
 
-            panelInputScores.add(new JLabel("enter the points scored by " + pool1.getPoolBouts()[poolResultsEntryPositionRow][poolResultsEntryPositionCol].getFencerRight().getName()));
-            rightFencerPointsScoredText = new JTextField();
-            panelInputScores.add(rightFencerPointsScoredText);
-
-            panelInputScores.add(new JButton("enter result"));
         }
+        //move to next spot on grid if current bout does not need score entry
         else {
             if (poolResultsEntryPositionCol<pool1.getPoolBouts()[0].length-1) {
                 poolResultsEntryPositionCol++;
+                setUpNextResultsInput();
+
             }
             else if (poolResultsEntryPositionRow<pool1.getPoolBouts().length-1) {
                 poolResultsEntryPositionRow++;
                 poolResultsEntryPositionCol = 0;
+                setUpNextResultsInput();
+
             }
-            setUpNextResultsInput();
         }
-        if (poolResultsEntryPositionCol<pool1.getPoolBouts()[0].length-1) {
-            poolResultsEntryPositionCol++;
-        }
-        else if (poolResultsEntryPositionRow<pool1.getPoolBouts().length-1) {
-            poolResultsEntryPositionRow++;
-            poolResultsEntryPositionCol = 0;
+    }
+
+    public void showStats() {
+        String[][] poolStats = pool1.getPoolStats();
+        for (String[] fencerStats: poolStats) {
+                panelShowStats.add(new JList<>(fencerStats));
         }
     }
 
@@ -152,7 +165,7 @@ public class FencingTournamentProgram implements ActionListener {
             int leftFencerPointsScored = Integer.parseInt(leftFencerPointsScoredText.getText());
             int rightFencerPointsScored = Integer.parseInt(rightFencerPointsScoredText.getText());
 
-            //results saving to pool bouts data
+            //result saving to pool bouts data
             pool1.getPoolBouts()[poolResultsEntryPositionRow][poolResultsEntryPositionCol].enterResults(leftFencerPointsScored, rightFencerPointsScored, (leftFencerPointsScored >= rightFencerPointsScored) ? pool1.getPoolBouts()[poolResultsEntryPositionRow][poolResultsEntryPositionCol].getFencerLeft() : pool1.getPoolBouts()[poolResultsEntryPositionRow][poolResultsEntryPositionCol].getFencerRight());
             pool1.getPoolBouts()[poolResultsEntryPositionCol][poolResultsEntryPositionRow].enterResults(rightFencerPointsScored,leftFencerPointsScored, (rightFencerPointsScored >= leftFencerPointsScored) ? pool1.getPoolBouts()[poolResultsEntryPositionCol][poolResultsEntryPositionRow].getFencerLeft() : pool1.getPoolBouts()[poolResultsEntryPositionCol][poolResultsEntryPositionRow].getFencerRight());
 
@@ -172,8 +185,16 @@ public class FencingTournamentProgram implements ActionListener {
                 pool1.getPoolBouts()[poolResultsEntryPositionRow][poolResultsEntryPositionCol].getFencerRight().incrementBoutsWon();
             }
 
+            //increment grid counter for next result entry
+            if (poolResultsEntryPositionCol<pool1.getPoolBouts()[0].length-1) {
+                poolResultsEntryPositionCol++;
+            }
+            else if (poolResultsEntryPositionRow<pool1.getPoolBouts().length-1) {
+                poolResultsEntryPositionRow++;
+                poolResultsEntryPositionCol = 0;
+            }
             if (poolResultsEntryPositionRow<pool1.getPoolBouts().length && poolResultsEntryPositionCol<pool1.getPoolBouts()[0].length) setUpNextResultsInput();
-            else System.out.println("done with result entry");
+            if (poolResultsEntryPositionRow==pool1.getPoolBouts().length-1 && poolResultsEntryPositionCol==pool1.getPoolBouts()[0].length-1) showStats();
         }
     }
 }
