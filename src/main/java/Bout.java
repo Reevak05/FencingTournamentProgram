@@ -1,7 +1,7 @@
 public class Bout {
 
     private Fencer fencerLeft, fencerRight;
-    private boolean boutComplete, isSelfBout;
+    private boolean boutComplete, isSelfBout, isTie;
     private int fencerLeftPointsScored, fencerRightPointsScored;
     private Fencer victor;
 
@@ -12,11 +12,19 @@ public class Bout {
         this.isSelfBout = (fencerLeft.equals(fencerRight));
     }
 
-    public void enterResults(int fencerLeftPointsScored, int fencerRightPointsScored, Fencer victor) {
+    public void enterResults(int fencerLeftPointsScored, int fencerRightPointsScored) {
         this.fencerLeftPointsScored = fencerLeftPointsScored;
         this.fencerRightPointsScored = fencerRightPointsScored;
-        this.victor = victor;
         this.boutComplete = true;
+        if (fencerLeftPointsScored>fencerRightPointsScored) {
+            this.victor = this.fencerLeft;
+            this.isTie = false;
+        }
+        else if (fencerLeftPointsScored<fencerRightPointsScored) {
+            this.victor = this.fencerRight;
+            this.isTie = false;
+        }
+        else this.isTie = true;
     }
 
     public Fencer getFencerLeft() {
@@ -49,8 +57,14 @@ public class Bout {
 
     @Override
     public String toString() {
-        if (isSelfBout) return "self bout: " + fencerLeft;
-        else if (boutComplete) return "bout complete: true, fencer left: " + this.fencerLeft + " points scored: " + this.fencerLeftPointsScored + " v fencer right: " + this.fencerRight + "points scored: " + this.fencerRightPointsScored + " victor: " + victor;
-        else return "bout complete: false, fencer left: " + this.fencerLeft + " v fencer right: " + this.fencerRight;
+        if (boutComplete && !isTie) {
+            return "victor: " + this.victor + "; fencer left: " + this.fencerLeft + " (" + this.fencerLeftPointsScored + ") v fencer right: " + this.fencerRight + " (" + this.fencerRightPointsScored + ")";
+        }
+        else if (boutComplete && isTie) {
+            return "tie; fencer left: " + this.fencerLeft + " (" + this.fencerLeftPointsScored + ") v fencer right: " + this.fencerRight + " (" + this.fencerRightPointsScored + ")";
+        }
+        else {
+            return "incomplete; fencer left: " + this.fencerLeft + " v fencer right: " + this.fencerRight;
+        }
     }
 }

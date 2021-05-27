@@ -1,5 +1,3 @@
-import java.util.HashMap;
-
 public class Fencer {
 
     private final int number;
@@ -77,7 +75,7 @@ public class Fencer {
 
     @Override
     public String toString() {
-        return "name: " + this.name + ", number: " + this.number;
+        return this.name;
     }
 
 
