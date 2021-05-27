@@ -29,7 +29,6 @@ public class Pool {
         return statsList;
     }
 
-
     public Bout[][] getPoolBouts() {
         return poolBouts;
     }
