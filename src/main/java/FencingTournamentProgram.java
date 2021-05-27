@@ -82,7 +82,7 @@ public class FencingTournamentProgram implements ActionListener {
 
 
         //frame setup
-        frame.setSize(600,250);
+        frame.setSize(650,250);
         frame.setVisible(true);
 
 
@@ -169,9 +169,9 @@ public class FencingTournamentProgram implements ActionListener {
                 panelInputScores.add(labelPanelInputScores);
                 panelInputScores.add(labelBoutForResultEntry);
                 panelInputScores.add(labelResultEntryFencer1);
-                panelInputScores.add(rightFencerPointsScoredText);
-                panelInputScores.add(labelResultEntryFencer2);
                 panelInputScores.add(leftFencerPointsScoredText);
+                panelInputScores.add(labelResultEntryFencer2);
+                panelInputScores.add(rightFencerPointsScoredText);
                 panelInputScores.add(buttonEnterResult);
                 setUpNextResultsInput();
             }

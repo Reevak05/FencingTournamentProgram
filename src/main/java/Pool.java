@@ -24,7 +24,7 @@ public class Pool {
             statsList[i][2] = "touches scored: " + this.poolFencers.get(i).getTouchesScored();
             statsList[i][3] = "touches received: " + this.poolFencers.get(i).getTouchesReceived();
             statsList[i][4] = "indicator: " + this.poolFencers.get(i).getIndicator();
-            statsList[i][5] = "percentage of bouts won: " + this.poolFencers.get(i).getWinPercentage() + "%";
+            statsList[i][5] = "percentage of bouts won: " + (this.poolFencers.get(i).getWinPercentage() + "     ").substring(0,5) + "%";
         }
         return statsList;
     }
