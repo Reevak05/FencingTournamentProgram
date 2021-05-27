@@ -4,7 +4,7 @@
 This program prompts the user to input the names of the fencers who will be competing in the pool. The program then generates bouts in a pool format, where every fencer fences every other fencer in the pool. Once each bout is complete, the user can input the results of the bouts. The program then calculates and displays the results of the bouts and the statistics for each fencer in the pool, including bouts won, touches scored, touches received, indicator, and win percentage.
 
 ## Operation Instructions
-To run the program, run `main()`in `FencingTournamentProgram.java`.
+To run the program, run `main()`in `FencingTournamentProgram.java`from the main branch.
 
 ## File Descriptions
 `README.md` includes a summary, operation instructions, file descriptions, and sources for the program. 
