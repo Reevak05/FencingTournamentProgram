@@ -128,10 +128,21 @@ public class FencingTournamentProgram implements ActionListener {
 
     public void showStats() {
         String[][] poolStats = pool1.getPoolStats();
+        //show fencer stats
         for (String[] fencerStats: poolStats) {
                 panelShowStats.add(new JList<>(fencerStats));
         }
+        //update bout result display
+        panelShowBouts.removeAll();
+        panelShowBouts.add(labelPanelShowBouts);
+        for (Bout[] boutRow : pool1.getPoolBouts()) {
+            for (Bout bout : boutRow) {
+                if (!bout.isSelfBout()) panelShowBouts.add(new JLabel(bout.toString()));
+            }
+        }
+        panelShowStats.updateUI();
     }
+
 
     /**
      * Invoked when an action occurs.
@@ -150,11 +161,12 @@ public class FencingTournamentProgram implements ActionListener {
         else if (buttonName.equals("create pool")) {
             //pool creation
             pool1 = new Pool(poolFencers);
-            for (Bout[] boutRow : pool1.getPoolBouts()) {
-                for (Bout bout : boutRow) {
-                    if (!bout.isSelfBout()) panelShowBouts.add(new JLabel(bout.toString()));
+            for (int row = 0; row < pool1.getPoolBouts().length; row++) {
+                for (int col = row; col <pool1.getPoolBouts()[0].length; col++) {
+                    if (!pool1.getPoolBouts()[row][col].isSelfBout()) panelShowBouts.add(new JLabel(pool1.getPoolBouts()[row][col].toString()));
                 }
             }
+            panelShowBouts.updateUI();
 
             //results entry setup
             setUpNextResultsInput();
