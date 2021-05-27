@@ -50,7 +50,7 @@ public class Bout {
     @Override
     public String toString() {
         if (isSelfBout) return "self bout: " + fencerLeft;
-        else if (boutComplete) return "bout complete: true, fencer left: " + this.fencerLeft + " points scored: " + this.fencerLeftPointsScored + " v fencer right: " + this.fencerRight + " points scored: " + this.fencerRightPointsScored + " victor: " + victor;
-        else return "bout complete: false, fencer left: " + this.fencerLeft + " v fencer right: " + this.fencerRight;
+        else if (boutComplete) return "victor: " + this.victor + "; fencer left: " + this.fencerLeft + " (" + this.fencerLeftPointsScored + ") v fencer right: " + this.fencerRight + " (" + this.fencerRightPointsScored + ")";
+        else return "incomplete; fencer left: " + this.fencerLeft + " v fencer right: " + this.fencerRight;
     }
 }

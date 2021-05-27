@@ -75,7 +75,7 @@ public class Fencer {
 
     @Override
     public String toString() {
-        return "name: " + this.name + ", number: " + this.number;
+        return this.name;
     }
 
 
