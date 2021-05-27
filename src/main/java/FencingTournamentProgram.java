@@ -63,21 +63,14 @@ public class FencingTournamentProgram implements ActionListener {
         panelInputScores.setLayout(new BoxLayout(panelInputScores, BoxLayout.Y_AXIS));
         labelPanelInputScores = new JLabel("Bout Results Input");
         labelPanelInputScores.setFont(new Font(labelPanelInputScores.getFont().getName(), Font.BOLD, 16));
-        panelInputScores.add(labelPanelInputScores);
 
         labelBoutForResultEntry = new JLabel("results entry - not for use yet");
-        panelInputScores.add(labelBoutForResultEntry);
         labelResultEntryFencer1 = new JLabel("fencer 1");
-        panelInputScores.add(labelResultEntryFencer1);
         rightFencerPointsScoredText = new JTextField();
-        panelInputScores.add(rightFencerPointsScoredText);
         labelResultEntryFencer2 = new JLabel("fencer 2");
-        panelInputScores.add(labelResultEntryFencer2);
         leftFencerPointsScoredText = new JTextField();
-        panelInputScores.add(leftFencerPointsScoredText);
         buttonEnterResult = new JButton("enter result");
         buttonEnterResult.addActionListener(this);
-        panelInputScores.add(buttonEnterResult);
 
         frame.add(panelInputScores);
 
@@ -91,7 +84,7 @@ public class FencingTournamentProgram implements ActionListener {
 
 
         //frame setup
-        frame.setSize(500,300);
+        frame.setSize(600,300);
         frame.setVisible(true);
 
 
@@ -176,6 +169,13 @@ public class FencingTournamentProgram implements ActionListener {
             panelInputFencers.removeAll();
 
             //results entry setup
+            panelInputScores.add(labelPanelInputScores);
+            panelInputScores.add(labelBoutForResultEntry);
+            panelInputScores.add(labelResultEntryFencer1);
+            panelInputScores.add(rightFencerPointsScoredText);
+            panelInputScores.add(labelResultEntryFencer2);
+            panelInputScores.add(leftFencerPointsScoredText);
+            panelInputScores.add(buttonEnterResult);
             setUpNextResultsInput();
         }
 
