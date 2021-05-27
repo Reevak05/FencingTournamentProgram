@@ -16,26 +16,6 @@ public class Pool {
 
     }
 
-    public void printPoolBouts() {
-        for (Bout[] boutRow : this.poolBouts) {
-            for (Bout bout : boutRow) {
-                System.out.println(bout);
-            }
-        }
-    }
-
-    public void printPoolStats() {
-        for (Fencer fencer : this.poolFencers) {
-            System.out.println(fencer);
-            System.out.println("bouts won: " + fencer.getBoutsWon());
-            System.out.println("touches scored: " + fencer.getTouchesScored());
-            System.out.println("touches received: " + fencer.getTouchesReceived());
-            System.out.println("indicator: " + fencer.getIndicator());
-            System.out.println("percentage of bouts won: " + fencer.getWinPercentage() + "%");
-            System.out.println();
-        }
-    }
-
     public String[][] getPoolStats() {
         String[][] statsList = new String[this.poolFencers.size()][6];
         for (int i = 0; i < this.poolFencers.size(); i++) {

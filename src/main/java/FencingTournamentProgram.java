@@ -96,8 +96,6 @@ public class FencingTournamentProgram implements ActionListener {
 
     //results entry setup
     public void setUpNextResultsInput(){
-        System.out.println(poolResultsEntryPositionRow + " row");
-        System.out.println(poolResultsEntryPositionCol + " col");
         leftFencerPointsScoredText.setText("");
         rightFencerPointsScoredText.setText("");
         if (!pool1.getPoolBouts()[poolResultsEntryPositionRow][poolResultsEntryPositionCol].isSelfBout() && !pool1.getPoolBouts()[poolResultsEntryPositionRow][poolResultsEntryPositionCol].isBoutComplete()) {
