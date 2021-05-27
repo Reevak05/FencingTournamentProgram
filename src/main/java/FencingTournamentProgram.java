@@ -54,7 +54,6 @@ public class FencingTournamentProgram implements ActionListener {
         panelShowBouts.setLayout(new BoxLayout(panelShowBouts, BoxLayout.Y_AXIS));
         labelPanelShowBouts = new JLabel("Bouts");
         labelPanelShowBouts.setFont(new Font(labelPanelShowBouts.getFont().getName(), Font.BOLD, 16));
-        panelShowBouts.add(labelPanelShowBouts);
 
         frame.add(panelShowBouts);
 
@@ -87,13 +86,12 @@ public class FencingTournamentProgram implements ActionListener {
         panelShowStats.setLayout(new BoxLayout(panelShowStats, BoxLayout.Y_AXIS));
         labelPanelShowStats = new JLabel("Fencer Stats");
         labelPanelShowStats.setFont(new Font(labelPanelShowStats.getFont().getName(), Font.BOLD, 16));
-        panelShowStats.add(labelPanelShowStats);
 
         frame.add(panelShowStats);
 
 
         //frame setup
-        frame.setSize(1500,300);
+        frame.setSize(500,300);
         frame.setVisible(true);
 
 
@@ -107,6 +105,8 @@ public class FencingTournamentProgram implements ActionListener {
     public void setUpNextResultsInput(){
         System.out.println(poolResultsEntryPositionRow + " row");
         System.out.println(poolResultsEntryPositionCol + " col");
+        leftFencerPointsScoredText.setText("");
+        rightFencerPointsScoredText.setText("");
         if (!pool1.getPoolBouts()[poolResultsEntryPositionRow][poolResultsEntryPositionCol].isSelfBout() && !pool1.getPoolBouts()[poolResultsEntryPositionRow][poolResultsEntryPositionCol].isBoutComplete()) {
             labelBoutForResultEntry.setText("results entry for: " + pool1.getPoolBouts()[poolResultsEntryPositionRow][poolResultsEntryPositionCol].getFencerLeft() + " v " + pool1.getPoolBouts()[poolResultsEntryPositionRow][poolResultsEntryPositionCol].getFencerRight());
             labelResultEntryFencer1.setText("enter the points scored by " + pool1.getPoolBouts()[poolResultsEntryPositionRow][poolResultsEntryPositionCol].getFencerLeft().getName());
@@ -129,6 +129,7 @@ public class FencingTournamentProgram implements ActionListener {
     }
 
     public void showStats() {
+        panelShowStats.add(labelPanelShowStats);
         String[][] poolStats = pool1.getPoolStats();
         //show fencer stats
         for (String[] fencerStats: poolStats) {
@@ -168,7 +169,11 @@ public class FencingTournamentProgram implements ActionListener {
             //pool creation
             pool1 = new Pool(poolFencers);
 
+            //show bouts to user
             updateBouts();
+
+            //remove Fencer Input pane
+            panelInputFencers.removeAll();
 
             //results entry setup
             setUpNextResultsInput();
@@ -180,14 +185,14 @@ public class FencingTournamentProgram implements ActionListener {
             int rightFencerPointsScored = Integer.parseInt(rightFencerPointsScoredText.getText());
 
             //result saving to pool bouts data
-            pool1.getPoolBouts()[poolResultsEntryPositionRow][poolResultsEntryPositionCol].enterResults(leftFencerPointsScored, rightFencerPointsScored, (leftFencerPointsScored >= rightFencerPointsScored) ? pool1.getPoolBouts()[poolResultsEntryPositionRow][poolResultsEntryPositionCol].getFencerLeft() : pool1.getPoolBouts()[poolResultsEntryPositionRow][poolResultsEntryPositionCol].getFencerRight());
-            pool1.getPoolBouts()[poolResultsEntryPositionCol][poolResultsEntryPositionRow].enterResults(rightFencerPointsScored,leftFencerPointsScored, (rightFencerPointsScored >= leftFencerPointsScored) ? pool1.getPoolBouts()[poolResultsEntryPositionCol][poolResultsEntryPositionRow].getFencerLeft() : pool1.getPoolBouts()[poolResultsEntryPositionCol][poolResultsEntryPositionRow].getFencerRight());
+            pool1.getPoolBouts()[poolResultsEntryPositionRow][poolResultsEntryPositionCol].enterResults(leftFencerPointsScored, rightFencerPointsScored);
+            pool1.getPoolBouts()[poolResultsEntryPositionCol][poolResultsEntryPositionRow].enterResults(rightFencerPointsScored,leftFencerPointsScored);
 
             //individual fencer stats update - left fencer
             pool1.getPoolBouts()[poolResultsEntryPositionRow][poolResultsEntryPositionCol].getFencerLeft().incrementTouchesScored(leftFencerPointsScored);
             pool1.getPoolBouts()[poolResultsEntryPositionRow][poolResultsEntryPositionCol].getFencerLeft().incrementTouchesReceived(rightFencerPointsScored);
             pool1.getPoolBouts()[poolResultsEntryPositionRow][poolResultsEntryPositionCol].getFencerLeft().incrementBoutsFenced();
-            if (leftFencerPointsScored >= rightFencerPointsScored) {
+            if (leftFencerPointsScored > rightFencerPointsScored) {
                 pool1.getPoolBouts()[poolResultsEntryPositionRow][poolResultsEntryPositionCol].getFencerLeft().incrementBoutsWon();
             }
 
@@ -195,7 +200,7 @@ public class FencingTournamentProgram implements ActionListener {
             pool1.getPoolBouts()[poolResultsEntryPositionRow][poolResultsEntryPositionCol].getFencerRight().incrementTouchesScored(rightFencerPointsScored);
             pool1.getPoolBouts()[poolResultsEntryPositionRow][poolResultsEntryPositionCol].getFencerRight().incrementTouchesReceived(leftFencerPointsScored);
             pool1.getPoolBouts()[poolResultsEntryPositionRow][poolResultsEntryPositionCol].getFencerRight().incrementBoutsFenced();
-            if (!(leftFencerPointsScored >= rightFencerPointsScored)) {
+            if (rightFencerPointsScored > leftFencerPointsScored) {
                 pool1.getPoolBouts()[poolResultsEntryPositionRow][poolResultsEntryPositionCol].getFencerRight().incrementBoutsWon();
             }
 
@@ -210,7 +215,10 @@ public class FencingTournamentProgram implements ActionListener {
                 poolResultsEntryPositionCol = 0;
             }
             if (poolResultsEntryPositionRow<pool1.getPoolBouts().length && poolResultsEntryPositionCol<pool1.getPoolBouts()[0].length) setUpNextResultsInput();
-            if (poolResultsEntryPositionRow==pool1.getPoolBouts().length-1 && poolResultsEntryPositionCol==pool1.getPoolBouts()[0].length-1) showStats();
+            if (poolResultsEntryPositionRow==pool1.getPoolBouts().length-1 && poolResultsEntryPositionCol==pool1.getPoolBouts()[0].length-1) {
+                showStats();
+                panelInputScores.removeAll();
+            }
         }
     }
 }
