@@ -7,15 +7,15 @@ This program prompts the user to input the names of the fencers who will be comp
 To run the program, run `main()`in `FencingTournamentProgram.java`from the main branch.
 
 ## File Descriptions
-`README.md` includes a summary, operation instructions, file descriptions, and sources for the program. 
+[`README.md`](https://github.com/Reevak05/FencingTournamentProgram/blob/main/README.md) includes a summary, operation instructions, file descriptions, and sources for the program. 
 
-`FencingTournamentProgram.java` facilitates rendering instructions for Swing, along with general management of the pool data.
+[`FencingTournamentProgram.java`](https://github.com/Reevak05/FencingTournamentProgram/blob/main/src/main/java/FencingTournamentProgram.java) facilitates rendering instructions for Swing, along with general management of the pool data.
 
-`Pool.java` contains the data for the pool and related methods;
+[`Pool.java`](https://github.com/Reevak05/FencingTournamentProgram/blob/main/src/main/java/Pool.java) contains the data for the pool and related methods;
 
-`Bout.java` contains data for bouts, including the left fencer, right fencer, points scored by each fencer, the victor, and whether the bout has been completed.
+[`Bout.java`](https://github.com/Reevak05/FencingTournamentProgram/blob/main/src/main/java/Bout.java) contains data for bouts, including the left fencer, right fencer, points scored by each fencer, the victor, and whether the bout has been completed.
 
-`Fencer.java` contains data for each fencer, including name, number, bouts won, bouts fenced, touches scored, touches received, indicator, win percentage, and a variety of related methods.
+[`Fencer.java`](https://github.com/Reevak05/FencingTournamentProgram/blob/main/src/main/java/Fencer.java) contains data for each fencer, including name, number, bouts won, bouts fenced, touches scored, touches received, indicator, win percentage, and a variety of related methods.
 
 ## Sources
 I referred to my past projects in case I needed to recall how to do something in Swing.
