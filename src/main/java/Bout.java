@@ -5,6 +5,11 @@ public class Bout {
     private int fencerLeftPointsScored, fencerRightPointsScored;
     private Fencer victor;
 
+    /**
+     * creates a new Bout
+     * @param fencerLeft the left fencer in the bout
+     * @param fencerRight the right fencer in the bout
+     */
     public Bout(Fencer fencerLeft, Fencer fencerRight) {
         this.fencerLeft = fencerLeft;
         this.fencerRight = fencerRight;
@@ -12,6 +17,11 @@ public class Bout {
         this.isSelfBout = (fencerLeft.equals(fencerRight));
     }
 
+    /**
+     * saves the results of the bout
+     * @param fencerLeftPointsScored the number of points scored by the left fencer
+     * @param fencerRightPointsScored the number of points scored by the right fencer
+     */
     public void enterResults(int fencerLeftPointsScored, int fencerRightPointsScored) {
         this.fencerLeftPointsScored = fencerLeftPointsScored;
         this.fencerRightPointsScored = fencerRightPointsScored;
@@ -27,34 +37,42 @@ public class Bout {
         else this.isTie = true;
     }
 
+    /**
+     * returns the left fencer
+     * @return the left fencer
+     */
     public Fencer getFencerLeft() {
         return fencerLeft;
     }
 
+    /**
+     * returns the right fencer
+     * @return the right fencer
+     */
     public Fencer getFencerRight() {
         return fencerRight;
     }
 
+    /**
+     * returns whether the bout is complete
+     * @return whether the bout is complete
+     */
     public boolean isBoutComplete() {
         return boutComplete;
     }
 
+    /**
+     * returns whether the bout is between the same fencer
+     * @return whether the bout is between the same fencer
+     */
     public boolean isSelfBout() {
         return isSelfBout;
     }
 
-    public int getFencerLeftPointsScored() {
-        return fencerLeftPointsScored;
-    }
-
-    public int getFencerRightPointsScored() {
-        return fencerRightPointsScored;
-    }
-
-    public Fencer getVictor() {
-        return victor;
-    }
-
+    /**
+     * returns the bout data formatted as a string
+     * @return the bout data formatted as a string
+     */
     @Override
     public String toString() {
         if (boutComplete && !isTie) {
