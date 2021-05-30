@@ -8,7 +8,7 @@ public class FencingTournamentProgram implements ActionListener {
 
     private JFrame frame;
     private JPanel panelInputFencers, panelShowBouts, panelInputScores, panelShowStats;
-    private JLabel labelPanelInputFencers, labelAddFencerName, labelPanelShowBouts, labelPanelInputScores, labelBoutForResultEntry, labelResultEntryFencer1, labelResultEntryFencer2, labelPanelShowStats;
+    private JLabel labelPanelInputFencers, labelAddFencerName, labelCreatePool, labelPanelShowBouts, labelPanelInputScores, labelBoutForResultEntry, labelResultEntryFencer1, labelResultEntryFencer2, labelPanelShowStats;
     private JTextField textFieldAddFencerName, leftFencerPointsScoredText, rightFencerPointsScoredText;
     private JButton buttonAddFencer, buttonCreatePool, buttonEnterResult;
     private ArrayList<Fencer> poolFencers = new ArrayList<>();
@@ -32,7 +32,7 @@ public class FencingTournamentProgram implements ActionListener {
         labelPanelInputFencers.setFont(new Font(labelPanelInputFencers.getFont().getName(), Font.BOLD, 16));
         panelInputFencers.add(labelPanelInputFencers);
 
-        labelAddFencerName = new JLabel("enter fencer name:");
+        labelAddFencerName = new JLabel("Enter fencer name below, then press \"add fencer\".");
         panelInputFencers.add(labelAddFencerName);
 
         textFieldAddFencerName = new JTextField();
@@ -41,6 +41,9 @@ public class FencingTournamentProgram implements ActionListener {
         buttonAddFencer = new JButton("add fencer");
         buttonAddFencer.addActionListener(this);
         panelInputFencers.add(buttonAddFencer);
+
+        labelCreatePool = new JLabel("Once you have entered the names of all the fencers in the pool, press \"create pool\".");
+        panelInputFencers.add(labelCreatePool);
 
         buttonCreatePool = new JButton("create pool");
         buttonCreatePool.addActionListener(this);
